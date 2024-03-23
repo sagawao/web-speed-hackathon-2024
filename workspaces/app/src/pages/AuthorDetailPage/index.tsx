@@ -31,6 +31,13 @@ const _AuthorImageWrapper = styled.div`
   }
 `;
 
+const _FallbackImage = styled.div`
+  width: 128px;
+  height: 128px;
+  background-color: ${Color.MONO_20};
+  border-radius: 50%;
+`;
+
 const AuthorDetailPage: React.FC = () => {
   const { authorId } = useParams<RouteParams<'/authors/:authorId'>>();
   invariant(authorId);
@@ -43,11 +50,11 @@ const AuthorDetailPage: React.FC = () => {
   return (
     <Box height="100%" px={Space * 2}>
       <_HeadingWrapper aria-label="作者情報">
-        {imageUrl != null && (
+        {imageUrl != null ? (
           <_AuthorImageWrapper>
             <Image key={author.id} alt={author.name} height={128} objectFit="cover" src={imageUrl} width={128} />
           </_AuthorImageWrapper>
-        )}
+        ) : <_FallbackImage />}
 
         <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
           <Text color={Color.MONO_100} typography={Typography.NORMAL20} weight="bold">
@@ -86,9 +93,45 @@ const AuthorDetailPage: React.FC = () => {
   );
 };
 
+const FallbackAuthorDetailPage: React.FC = () => {
+  return (
+    <Box height="100%" px={Space * 2}>
+      <_HeadingWrapper aria-label="作者情報">
+        <_FallbackImage />
+
+        <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
+          <Text color={Color.MONO_100} typography={Typography.NORMAL20} weight="bold">
+            ...
+          </Text>
+          <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL14}>
+            ...
+          </Text>
+        </Flex>
+      </_HeadingWrapper>
+
+      <Separator />
+
+      <Box as="section" maxWidth="100%" py={Space * 2} width="100%">
+        <Text as="h2" color={Color.MONO_100} typography={Typography.NORMAL20} weight="bold">
+          作品一覧
+        </Text>
+
+        <Spacer height={Space * 2} />
+
+        <Flex align="center" as="ul" direction="column" justify="center">
+          <Spacer height={Space * 2} />
+          <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
+            この作者の作品はありません
+          </Text>
+        </Flex>
+      </Box>
+    </Box >
+  );
+};
+
 const AuthorDetailPageWithSuspense: React.FC = () => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<FallbackAuthorDetailPage />}>
       <AuthorDetailPage />
     </Suspense>
   );
