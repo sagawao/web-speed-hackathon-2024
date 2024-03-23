@@ -11,6 +11,12 @@ importers:
       '@3846masa/configs':
         specifier: github:3846masa/configs#0e9352c7ad57e51187647f2c4aa27baea842d149
         version: github.com/3846masa/configs/0e9352c7ad57e51187647f2c4aa27baea842d149
+      '@playwright/test':
+        specifier: 1.42.1
+        version: 1.42.1
+      '@types/node':
+        specifier: 20.11.30
+        version: 20.11.30
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -3709,12 +3715,17 @@ packages:
   /@types/node-fetch@2.6.11:
     resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
     dependencies:
-      '@types/node': 20.9.0
+      '@types/node': 20.11.30
       form-data: 4.0.0
     dev: false
 
   /@types/node@16.9.1:
     resolution: {integrity: sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==}
+
+  /@types/node@20.11.30:
+    resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
+    dependencies:
+      undici-types: 5.26.5
 
   /@types/node@20.9.0:
     resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}

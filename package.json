@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@3846masa/configs": "github:3846masa/configs#0e9352c7ad57e51187647f2c4aa27baea842d149",
+    "@playwright/test": "1.42.1",
+    "@types/node": "20.11.30",
     "eslint": "8.56.0",
     "eslint-plugin-react": "7.34.0",
     "eslint-plugin-react-hooks": "4.6.0",
