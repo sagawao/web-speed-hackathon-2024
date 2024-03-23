@@ -19,6 +19,7 @@ module.exports = {
         pathGroupsExcludedImportTypes: ['builtin', 'object'],
       },
     ],
+    'unused-imports/no-unused-imports': 'error',
     'no-undefined': 'off',
     'react/jsx-sort-props': [
       'error',
