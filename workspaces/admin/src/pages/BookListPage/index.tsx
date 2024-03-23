@@ -45,17 +45,17 @@ type BookModalMode = (typeof BookModalMode)[keyof typeof BookModalMode];
 
 type BookModalState =
   | {
-      mode: typeof BookModalMode.None;
-      params: object;
-    }
+    mode: typeof BookModalMode.None;
+    params: object;
+  }
   | {
-      mode: typeof BookModalMode.Detail;
-      params: { bookId: string };
-    }
+    mode: typeof BookModalMode.Detail;
+    params: { bookId: string };
+  }
   | {
-      mode: typeof BookModalMode.Create;
-      params: object;
-    };
+    mode: typeof BookModalMode.Create;
+    params: object;
+  };
 
 type BookModalAction = {
   close: () => void;
@@ -72,7 +72,7 @@ export const BookListPage: React.FC = () => {
       kind: BookSearchKind.BookId as BookSearchKind,
       query: '',
     },
-    onSubmit() {},
+    onSubmit() { },
   });
 
   const filteredBookList = useMemo(() => {
@@ -250,3 +250,5 @@ export const BookListPage: React.FC = () => {
     </>
   );
 };
+
+export default BookListPage;

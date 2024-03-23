@@ -43,17 +43,17 @@ type AuthorModalMode = (typeof AuthorModalMode)[keyof typeof AuthorModalMode];
 
 type AuthorModalState =
   | {
-      mode: typeof AuthorModalMode.None;
-      params: object;
-    }
+    mode: typeof AuthorModalMode.None;
+    params: object;
+  }
   | {
-      mode: typeof AuthorModalMode.Detail;
-      params: { authorId: string };
-    }
+    mode: typeof AuthorModalMode.Detail;
+    params: { authorId: string };
+  }
   | {
-      mode: typeof AuthorModalMode.Create;
-      params: object;
-    };
+    mode: typeof AuthorModalMode.Create;
+    params: object;
+  };
 
 type AuthorModalAction = {
   close: () => void;
@@ -70,7 +70,7 @@ export const AuthorListPage: React.FC = () => {
       kind: AuthorSearchKind.AuthorId as AuthorSearchKind,
       query: '',
     },
-    onSubmit() {},
+    onSubmit() { },
   });
 
   const filteredAuthorList = useMemo(() => {
@@ -214,3 +214,5 @@ export const AuthorListPage: React.FC = () => {
     </>
   );
 };
+
+export default AuthorListPage;
