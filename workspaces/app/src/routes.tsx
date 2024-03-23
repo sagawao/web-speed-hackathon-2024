@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -8,10 +8,12 @@ import { Text } from './foundation/components/Text';
 import { ActionLayout } from './foundation/layouts/ActionLayout';
 import { CommonLayout } from './foundation/layouts/CommonLayout';
 import { Color, Space, Typography } from './foundation/styles/variables';
-import { AuthorDetailPage } from './pages/AuthorDetailPage';
-import { BookDetailPage } from './pages/BookDetailPage';
-import { EpisodeDetailPage } from './pages/EpisodeDetailPage';
-import { SearchPage } from './pages/SearchPage';
+
+const AuthorDetailPage = lazy(() => import('./pages/AuthorDetailPage'));
+const BookDetailPage = lazy(() => import('./pages/BookDetailPage'));
+const EpisodeDetailPage = lazy(() => import('./pages/EpisodeDetailPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
+
 import { TopPage } from './pages/TopPage';
 
 const _BackToTopButton = styled(Link)`
