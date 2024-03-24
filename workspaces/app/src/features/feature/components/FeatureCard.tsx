@@ -28,6 +28,13 @@ const _ImgWrapper = styled.div`
   }
 `;
 
+const _ImgFallback = styled.div`
+  width: 96px;
+  height: 96px;
+  background-color: ${Color.MONO_20};
+  border-radius: ${Radius.SMALL};
+`;
+
 const _ContentWrapper = styled.div`
   display: grid;
   gap: ${Space * 1}px;
@@ -43,6 +50,13 @@ const _AvatarWrapper = styled.div`
   }
 `;
 
+const _AvatarWrapperFallback = styled.div`
+  width: 32px;
+  height: 32px;
+  background-color: ${Color.MONO_20};
+  border-radius: 50%;
+`;
+
 type Props = {
   bookId: string;
 };
@@ -55,11 +69,11 @@ const FeatureCard: React.FC<Props> = ({ bookId }) => {
 
   return (
     <_Wrapper href={`/books/${bookId}`}>
-      {imageUrl != null && (
+      {imageUrl != null ? (
         <_ImgWrapper>
           <Image alt={book.image.alt} height={96} objectFit="cover" src={imageUrl} width={96} />
         </_ImgWrapper>
-      )}
+      ) : <_ImgFallback />}
 
       <_ContentWrapper>
         <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
@@ -70,11 +84,50 @@ const FeatureCard: React.FC<Props> = ({ bookId }) => {
         </Text>
 
         <Flex align="center" gap={Space * 1} justify="flex-end">
-          {authorImageUrl != null && (
+          {authorImageUrl != null ? (
             <_AvatarWrapper>
               <Image alt={book.author.name} height={32} objectFit="cover" src={authorImageUrl} width={32} />
             </_AvatarWrapper>
-          )}
+          ) : <_AvatarWrapperFallback />}
+          <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
+            {book.author.name}
+          </Text>
+        </Flex>
+      </_ContentWrapper>
+    </_Wrapper>
+  );
+};
+
+const FallbackFeatureCard: React.FC = () => {
+  const book = {
+    name: 'Fallback Book',
+    description: 'This is a fallback book',
+    image: {
+      alt: 'Fallback Book Image',
+      id: 'fallback-book-image-id',
+    },
+    author: {
+      name: 'Fallback Author',
+      image: {
+        id: 'fallback-author-image-id',
+      },
+    },
+  };
+
+  return (
+    <_Wrapper>
+      <_ImgFallback />
+
+      <_ContentWrapper>
+        <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
+          {book.name}
+        </Text>
+        <Text as="p" color={Color.MONO_100} typography={Typography.NORMAL14}>
+          {book.description}
+        </Text>
+
+        <Flex align="center" gap={Space * 1} justify="flex-end">
+          <_AvatarWrapperFallback />
           <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
             {book.author.name}
           </Text>
@@ -86,7 +139,7 @@ const FeatureCard: React.FC<Props> = ({ bookId }) => {
 
 const FeatureCardWithSuspense: React.FC<Props> = (props) => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<FallbackFeatureCard />}>
       <FeatureCard {...props} />
     </Suspense>
   );

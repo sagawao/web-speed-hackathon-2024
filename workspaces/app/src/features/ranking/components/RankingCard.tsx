@@ -29,12 +29,26 @@ const _ImgWrapper = styled.div`
   }
 `;
 
+const _ImgFallback = styled.div`
+  width: 96px;
+  height: 96px;
+  background-color: ${Color.MONO_20};
+  border-radius: ${Radius.SMALL};
+`;
+
 const _AvatarWrapper = styled.div`
   width: 32px;
   height: 32px;
   > img {
     border-radius: 50%;
   }
+`;
+
+const _AvatarWrapperFallback = styled.div`
+  width: 32px;
+  height: 32px;
+  background-color: ${Color.MONO_20};
+  border-radius: 50%;
 `;
 
 type Props = {
@@ -52,11 +66,11 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
       <_Link href={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align="flex-start" gap={Space * 2.5} justify="flex-start">
-          {imageUrl != null && (
+          {imageUrl != null ? (
             <_ImgWrapper>
               <Image alt={book.name} height={96} objectFit="cover" src={imageUrl} width={96} />
             </_ImgWrapper>
-          )}
+          ) : <_ImgFallback />}
           <Box width="100%">
             <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
               <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
@@ -70,7 +84,7 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
             <Spacer height={Space * 1} />
 
             <Flex align="center" gap={Space * 1} justify="flex-end">
-              {authorImageUrl != null && (
+              {authorImageUrl != null ? (
                 <_AvatarWrapper>
                   <Image
                     alt={`${book.author.name}のアイコン`}
@@ -80,7 +94,7 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
                     width={32}
                   />
                 </_AvatarWrapper>
-              )}
+              ) : <_AvatarWrapperFallback />}
               <Text color={Color.MONO_80} typography={Typography.NORMAL12}>
                 {book.author.name}
               </Text>
@@ -103,9 +117,51 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
   );
 };
 
+const FallbackRankingCard: React.FC = () => {
+
+  return (
+    <_Wrapper>
+      <Spacer height={Space * 1.5} />
+      <Flex align="flex-start" gap={Space * 2.5} justify="flex-start">
+        <_ImgFallback />
+        <Box width="100%">
+          <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
+            <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
+              ...
+            </Text>
+            <Text as="p" color={Color.MONO_80} typography={Typography.NORMAL12}>
+              ...
+            </Text>
+          </Flex>
+
+          <Spacer height={Space * 1} />
+
+          <Flex align="center" gap={Space * 1} justify="flex-end">
+            <_AvatarWrapperFallback />
+            <Text color={Color.MONO_80} typography={Typography.NORMAL12}>
+              ... ...
+            </Text>
+          </Flex>
+
+          <Spacer height={Space * 1} />
+
+          <Flex align="center" justify="flex-end">
+            <Text color={Color.Secondary} typography={Typography.NORMAL14} weight="bold">
+              この漫画を読む
+            </Text>
+            <SvgIcon color={Color.Secondary} height={32} type="NavigateNext" width={32} />
+          </Flex>
+        </Box>
+      </Flex>
+      <Spacer height={Space * 1.5} />
+      <Separator />
+    </_Wrapper >
+  );
+};
+
 const RankingCardWithSuspense: React.FC<Props> = (props) => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<FallbackRankingCard />}>
       <RankingCard {...props} />
     </Suspense>
   );

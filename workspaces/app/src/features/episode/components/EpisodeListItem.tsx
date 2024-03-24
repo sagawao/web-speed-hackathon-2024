@@ -27,6 +27,13 @@ const _ImgWrapper = styled.div`
   }
 `;
 
+const _FallbackImage = styled.div`
+  width: 96px;
+  height: 96px;
+  background-color: ${Color.MONO_20};
+  border-radius: ${Radius.SMALL};
+`;
+
 type Props = {
   bookId: string;
   episodeId: string;
@@ -42,11 +49,11 @@ export const EpisodeListItem: React.FC<Props> = ({ bookId, episodeId }) => {
       <_Link href={`/books/${bookId}/episodes/${episode.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align="flex-start" gap={Space * 2.5} justify="flex-start">
-          {imageUrl != null && (
+          {imageUrl != null ? (
             <_ImgWrapper>
               <Image alt={episode.name} height={96} objectFit="cover" src={imageUrl} width={96} />
             </_ImgWrapper>
-          )}
+          ) : <_FallbackImage />}
           <Box width="100%">
             <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
               <Flex align="center" justify="flex-start">

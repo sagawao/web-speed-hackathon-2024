@@ -1,5 +1,7 @@
 /// <reference types="@types/serviceworker" />
 import PQueue from 'p-queue';
+import { Buffer } from 'buffer';
+
 
 import { jitter } from './jitter';
 import { transformJpegXLToBmp } from './transformJpegXLToBmp';

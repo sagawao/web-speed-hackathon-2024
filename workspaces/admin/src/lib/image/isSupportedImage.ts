@@ -1,4 +1,3 @@
-import { fileTypeFromBuffer } from 'file-type';
 import { Magika } from 'magika';
 
 const SUPPORTED_MAGIKA_LABEL_LIST = ['bmp', 'jpeg', 'png', 'webp'];
@@ -19,7 +18,7 @@ export async function isSupportedImage(image: File): Promise<boolean> {
     return true;
   }
 
-  const fileType = await fileTypeFromBuffer(await image.arrayBuffer());
+  const fileType = image.type ? { mime: image.type } : undefined;
   if (SUPPORTED_MIME_TYPE_LIST.includes(fileType?.mime ?? '')) {
     return true;
   }

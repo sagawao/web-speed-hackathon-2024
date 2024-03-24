@@ -21,3 +21,5 @@ export const EpisodeDetailPage: React.FC = () => {
 
   return <EpisodeDetailEditor book={book} episode={episode} />;
 };
+
+export default EpisodeDetailPage;

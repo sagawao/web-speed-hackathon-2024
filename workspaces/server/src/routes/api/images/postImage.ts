@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { Buffer } from 'buffer';
 
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 

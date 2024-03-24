@@ -1,3 +1,3 @@
-import { init as ucaInit } from 'unicode-collation-algorithm2';
+import { init } from 'unicode-collation-algorithm2';
 
-ucaInit();
+init()

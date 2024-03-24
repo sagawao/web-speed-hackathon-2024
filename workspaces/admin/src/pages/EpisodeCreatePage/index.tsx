@@ -19,3 +19,5 @@ export const EpisodeCreatePage: React.FC = () => {
 
   return <EpisodeDetailEditor book={book} />;
 };
+
+export default EpisodeCreatePage;
